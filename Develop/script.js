@@ -1,6 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-
+var pass = ""
 //Default options for different characters
 var Caps = false;
 var lower = false;
@@ -20,6 +20,11 @@ var PasChar =""
 var PasArray = []
 //Sets the minimum length of a password
 var minlength = 8;
+//Password default & document selection of text box for password
+var pass = "Click for a secure password"
+var passwordText = document.querySelector("#password");
+//writes default password to text box on page reload
+passwordText.value = pass;
 
 
 //New Function
@@ -66,7 +71,7 @@ if(Number.isInteger(lengthInt)==false){
   i--
 } else if (lengthInt < minlength ){
   //if lengthInt is a number, but its less than the minimum, requests user to use a longer password
-  alert("Passwords must be more than ", minlength, "characters")
+  alert("Password is not long enough")
   i--
 }}
 
@@ -74,15 +79,26 @@ if(Number.isInteger(lengthInt)==false){
 //New Function
 //Function to generate Password using the length and Array of characters previously calculated
 function generatePassword(lengthInt,PasArray){
+  //Wipes Pass variable clean of default
+  pass="" 
+  //for loop, continues for length of lengthInt, has a number N which is the length of the array to allow for random selection using Math.Random
+  for(let i = 0, n=PasArray.length;i < lengthInt; ++i) {
+    //math.random of 0 to index of last char in PasArray, using floor to make it an interger, which then selects the index of the random number
+    pass += PasArray[(Math.floor(Math.random() * n))];
+  }
 }
 
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+  //Run function to generate the array of characters
+  PasArrayGen()
+  //Run function to get length of password
+  PasLenght()
+  //Run function to generate random password using output from previous functions 
+  generatePassword(lengthInt,PasArray);
+  //writes generated password to text box
+  passwordText.value = pass;
 }
 
 // Add event listener to generate button
