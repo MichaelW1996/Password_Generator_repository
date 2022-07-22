@@ -1,25 +1,17 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var pass = ""
-//Default options for different characters
-var Caps = false;
-var lower = false;
-var Numbers = false;
-var special = false;
-//setting up variables for length, in string & parsed number
-var length = "0";
-var lengthInt= 0;
+//Variables for length in parsed number to make globally avaiable
+var lengthInt= 0
+//Sets the minimum & maximum length of a password
+var minlength = 8
+var maxlength = 128
 //All possible characters in each catagory in string format
 var UpChar ="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 var LoChar ="abcdefghijklmnopqrstuvwxyz"
 var numChar ="0123456789"
 var SpChar ="!£$%&*#@?><'"
-//Characters to be used to generate password, defaulted empty, is concated with the optional catagories above
-var PasChar =""
-//setup of variable as variable conversion of PasChar
+//setup of array which will hold avaiable characters for password
 var PasArray = []
-//Sets the minimum length of a password
-var minlength = 8;
 //Password default & document selection of text box for password
 var pass = "Click for a secure password"
 var passwordText = document.querySelector("#password");
@@ -30,7 +22,11 @@ passwordText.value = pass;
 //New Function
 //Checking type of characters to be used
 function PasArrayGen(){
+  //Characters to be used to generate password, defaulted empty, is concated with the optional catagories above
+var PasChar =""
   //Asks user if they'd like capitals, if true, concats UpChar (Upper case characters) to PasChar (Array of characters to be used for password generation)
+  //loops till an allowable collection of characters has been made
+  for(let i =0; i < 1; i++){
 if(confirm("Captial letters?")==true){
   PasChar= PasChar.concat(UpChar)
 }
@@ -46,10 +42,11 @@ if(confirm("Numbers?")==true){
 if(confirm("Special Characters?")==true){
   PasChar= PasChar.concat(SpChar)
 }
-//Asks user if they'd like capitals, if true, concats UpChar (Upper case characters) to PasChar (Array of characters to be used for password generation)
+//checks if the user didnt select any characters, if so, restarts the loop
 if(PasChar == ""){
-  alert("Try again")
-}
+  alert("Please select at least one set of characters")
+  i--
+}}
 //splits PasChar from a string to an array with an entry for every character [A],[B],[C] etc
 PasArray = PasChar.split("")
 }
@@ -58,9 +55,10 @@ PasArray = PasChar.split("")
 //New Function
 //Asking and checking password length
 function PasLenght() {
-
+  //loops till an appropriate length has been selected
+  for(let i = 0; i <1; i++ ){
 //asks user for Password length
-length = (prompt("Password length",""));
+var length = (prompt("Password length",""));
 //converts user responce from string to number
 lengthInt = parseInt(length)
 
@@ -73,7 +71,11 @@ if(Number.isInteger(lengthInt)==false){
   //if lengthInt is a number, but its less than the minimum, requests user to use a longer password
   alert("Password is not long enough")
   i--
-}}
+} else if (lengthInt > maxlength) {
+  //if lengthInt is a number, but its more than the max, requests user to use a shorter password
+  alert("Password is too long")
+  i--
+}}}
 
 
 //New Function
@@ -82,9 +84,9 @@ function generatePassword(lengthInt,PasArray){
   //Wipes Pass variable clean of default
   pass="" 
   //for loop, continues for length of lengthInt, has a number N which is the length of the array to allow for random selection using Math.Random
-  for(let i = 0, n=PasArray.length;i < lengthInt; ++i) {
+  for(let i = 0;i < lengthInt; ++i) {
     //math.random of 0 to index of last char in PasArray, using floor to make it an interger, which then selects the index of the random number
-    pass += PasArray[(Math.floor(Math.random() * n))];
+    pass += PasArray[(Math.floor(Math.random() * PasArray.length))];
   }
 }
 

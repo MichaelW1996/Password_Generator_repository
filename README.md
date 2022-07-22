@@ -1,100 +1,69 @@
-# 03 JavaScript: Password Generator
+# Password generator
 
-## Your Task
+### I'd like to make a generator to create random passwords for security 
 
-This week's Challenge requires you to modify starter code to create an application that enables employees to generate random passwords based on criteria that they’ve selected. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean and polished, responsive user interface that adapts to multiple screen sizes.
+#### Below i have detailed the process of making this password generator.
 
-The password can include special characters. If you’re unfamiliar with these, see this [list of password special characters](https://www.owasp.org/index.php/Password_special_characters) from the OWASP Foundation.
+<br>
 
-## User Story
+Link to live site: https://github.com/MichaelW1996/Password_Generator_repository
 
-```
-AS AN employee with access to sensitive data
-I WANT to randomly generate a password that meets certain criteria
-SO THAT I can create a strong password that provides greater security
-```
+<br>
 
-## Acceptance Criteria
+## Javascript:
 
-```
-GIVEN I need a new, secure password
-WHEN I click the button to generate a password
-THEN I am presented with a series of prompts for password criteria
-WHEN prompted for password criteria
-THEN I select which criteria to include in the password
-WHEN prompted for the length of the password
-THEN I choose a length of at least 8 characters and no more than 128 characters
-WHEN asked for character types to include in the password
-THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
-WHEN I answer each prompt
-THEN my input should be validated and at least one character type should be selected
-WHEN all prompts are answered
-THEN a password is generated that matches the selected criteria
-WHEN the password is generated
-THEN the password is either displayed in an alert or written to the page
-```
+Starting point:
 
-## Mock-Up
+    Starting code was provided, this had adequate styling, HTML content and partial Javascript, i took this and developed the JS to perform the function of the site.
 
-The following image shows the web application's appearance and functionality:
+Javascript:
 
-![The Password Generator application displays a red button to "Generate Password".](./Assets/03-javascript-homework-demo.png)
+    At the top of the document i have listed variables that i wish to be global, i also find this is a more convenient place to store them if i should want to adjust any properties of the program such as which special characters are available or the maximum lenght of a password
 
-## Grading Requirements
+    I gave variable names to some data that i only used once in order to make the code more readable, a good example of this is the min and max lenghts for the password 
 
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
+    I had noticed that the page would retain the password generated even after a refresh, as such i started the JS by defining the "pass" variable as a default text and writing this to the page as a clean slate
 
-This Challenge is graded based on the following criteria: 
+    Function 1: Generate an array of possible characters
 
-### Technical Acceptance Criteria: 40%
+        My first function, when called, prompts the user to create an array of chosen characters.
 
-* Satisfies all of the preceding acceptance criteria.
+        This is acheived by using PasChar as a working string which is added to at each step
 
-### Deployment: 32%
+        I used concat to attach the selected characters to the working string PasChar if the confirm box is true (indicating user pressed "OK")
 
-* Application deployed at live URL.
+        After all the confirms have been accepted or skipped i check that the working string is not still blank, using PasChar == "", if it is blank, the function starts over after alerting use "Please select at least one set of characters"
 
-* Application loads with no errors.
 
-* Application GitHub URL submitted.
+    Function 2: Ask for a length of password and return alerts if the responce is not valid
 
-* GitHub repository that contains application code.
+        User is prompted for a password length, this is stored as variable "length"
 
-### Application Quality: 15%
+        If variable length is not an interger, user received alert "Type a number" and function starts over
 
-* Application user experience is intuitive and easy to navigate.
+        If variable length is less than Min length, user received alert "Password is not long enough" and function starts over
 
-* Application user interface style is clean and polished.
+        If variable length is longer than max length, user received alert "Password is too long enough" and function starts over
 
-* Application resembles the mock-up functionality provided in the Challenge instructions.
 
-### Repository Quality: 13%
+    Function 3: GeneratePassword using input of the previous 2 functions this is performed by: 
+    
+        Wiping the "pass" variable clean using // pass="" //
 
-* Repository has a unique name.
+        A loop is then run, starting at i= 0, ending when i is equal to Length described by Function 2
 
-* Repository follows best practices for file structure and naming conventions.
+        Each time the loop runs a character from the array of available characters is selected by a random number generator, this character is added to the pass variable
 
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
+        the random number is generated by using Math.random times by the array lenght, this gives a random floating digit between 0 and the array length. 
 
-* Repository contains multiple descriptive commit messages.
+        This random floating point number is turned into an interger that can be used to choose the character using the math.floor function
 
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
 
-## Review
+    Function 4: Write Password
 
-You are required to submit the following for review:
+        This function runs function 1-3 then prints the value to the HTML 
 
-* The URL of the deployed application.
 
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
+    The JS ends with an event listener waiting for a click on the generate button, when pressed the Write password function is run 
 
-- - -
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+Coded by Michael Walters
