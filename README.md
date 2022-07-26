@@ -10,6 +10,7 @@ Link to live site: https://github.com/MichaelW1996/Password_Generator_repository
 
 <br>
 
+
 ## Javascript:
 
 Starting point:
@@ -65,5 +66,31 @@ Javascript:
 
 
     The JS ends with an event listener waiting for a click on the generate button, when pressed the Write password function is run 
+
+
+## Screenshots
+
+Screenshot of deployed site:
+
+![Live](Assets/Images/LiveSite.png)
+
+User inputs:
+
+![Confirm](Assets/Images/Confirm.png)
+
+![Number input](Assets/Images/Length%20Prompt.png)
+
+
+Failed State:
+
+![Failed on characters](Assets/Images/Failed.png)
+
+![Failed length](Assets/Images/FailedLength.png)
+
+
+Result:
+
+![Password](Assets/Images/Password.png)
+
 
 Coded by Michael Walters
